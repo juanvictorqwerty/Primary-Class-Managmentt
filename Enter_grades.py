@@ -7,7 +7,7 @@ def main(page: ft.Page):
 
     # Définition des colonnes
     columns = [
-        "Matricule", "Trimestre", "Maths", "Sciences", "Histoire", "Geo", "ECM", "Francais", "Anglais"
+        "Matricule", "Trimestre", "  Maths  ", "Sciences", "Histoire", "  Geo   ", "  ECM   ", "Francais", "Anglais"
     ]
 
     table = ft.DataTable(
@@ -26,7 +26,7 @@ def main(page: ft.Page):
             if index == 1:  # Trimestre
                 field = ft.TextField(width=100, height=40, input_filter=ft.InputFilter(r'^\d*$'), hint_text="1-3")
             elif index >= 2:  # Notes
-                field = ft.TextField(width=100, height=40, input_filter=ft.InputFilter(r'^\d*$'), hint_text="0-20")
+                field = ft.TextField(width=100, height=45, input_filter=ft.InputFilter(r'^\d*$'), hint_text="0-20")
             else:  # Matricule
                 field = ft.TextField(width=100, height=40)
 
