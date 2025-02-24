@@ -11,8 +11,9 @@ def ensure_excel_file():
         wb = openpyxl.Workbook()
         ws = wb.active
         ws.title = "Students"
-        ws["A3"] = "Matricule"
-        ws["B3"] = "Name"
+        ws["A1"] = "Matricule"
+        ws["B2"] = "Name"
+
         wb.save(EXCEL_FILE)
 
 def is_unique_matricule(matricule):
@@ -23,20 +24,39 @@ def is_unique_matricule(matricule):
     return matricule not in existing_ids
 
 def add_to_excel(matricule, name):
-    """Append the Matricule and Name to the Excel file, ensuring uniqueness."""
+    """Append the Name in row 1 and Matricule in row 2 in the 'Trimestre 1' sheet."""
+    wb = openpyxl.load_workbook(EXCEL_FILE)
+    
+    # Check if 'Trimestre 1' sheet exists, if not create it
+    if 'Trimestre 1' not in wb.sheetnames:
+        ws = wb.create_sheet(title='Trimestre 1')
+        ws.append(["Matricule", "Name"])  # Add headers
+    else:
+        ws = wb['Trimestre 1']
+
+    # Find the next empty row
+    next_row = ws.max_row + 1
+
+    # Add Matricule and Name
+    ws.cell(row=next_row, column=1, value=matricule)
+    ws.cell(row=next_row, column=2, value=name)
+
+    wb.save(EXCEL_FILE)
+
     wb = openpyxl.load_workbook(EXCEL_FILE)
     ws = wb.active
 
-    # Find the next empty row starting from A4
-    row = 4
-    while ws[f"A{row}"].value is not None:
-        row += 1
+    # Find the next empty column starting from column H (column index 8)
+    col_index = 8  # Column H
+    while ws.cell(row=1, column=col_index).value is not None:
+        col_index += 1  # Move to the next column
 
-    # Write values
-    ws[f"A{row}"] = matricule
-    ws[f"B{row}"] = name
+    # Add Name in row 1 and Matricule in row 2
+    ws.cell(row=1, column=col_index, value=matricule)
+    ws.cell(row=2, column=col_index, value=name)
 
     wb.save(EXCEL_FILE)
+
 
 def main(page: ft.Page):
     page.title = "Enter Matricule and Name"
