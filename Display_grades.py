@@ -29,6 +29,13 @@ def fetch_grades(matricule):
             grade = ws.cell(row=row_num, column=matricule_col).value
             grades[subject] = grade
 
+        # Calculate the average
+        valid_grades = [grade for grade in grades.values() if isinstance(grade, (int, float))]
+        if valid_grades:
+            grades["Moyenne"] = sum(valid_grades) / len(valid_grades)
+        else:
+            grades["Moyenne"] = "N/A"
+
         return {"name": name, "grades": grades}
     except Exception as e:
         print(f"Error fetching grades: {e}")
