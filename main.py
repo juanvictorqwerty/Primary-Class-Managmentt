@@ -14,8 +14,8 @@ def main(page: ft.Page):
             if not os.path.exists(script_path):
                 raise FileNotFoundError(f"{script_name} not found!")
             
-            # Use subprocess to open the script in a new console window
-            subprocess.Popen([sys.executable, script_path], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            # Use subprocess to open the script without a console window
+            subprocess.Popen([sys.executable, script_path], creationflags=subprocess.CREATE_NO_WINDOW)
 
             status_text.value = f"{script_name} launched successfully!"
             status_text.color = ft.colors.GREEN
