@@ -9,7 +9,7 @@ def ensure_excel_file():
     if not os.path.exists(EXCEL_FILE):
         wb = openpyxl.Workbook()
         ws = wb.active
-        ws.title = "Grades"
+        ws.title = " Grades  "
         # Add headers for subjects in column A
         subjects = ["Matricule", "Name", "Maths", "Sciences", "Histoire", "Geo", "ECM", "Francais", "Anglais"]
         for row_num, subject in enumerate(subjects, start=1):
@@ -75,8 +75,8 @@ def main(page: ft.Page):
     table_rows = []
     for subject in subjects:
         grade_field = ft.TextField(
-            width=100,
-            height=40,
+            width=300,
+            height=450,
             input_filter=ft.InputFilter(r'^\d*$'),  # Only allow numeric input
             hint_text="0-20"
         )
