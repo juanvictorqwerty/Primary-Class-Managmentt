@@ -55,6 +55,9 @@ def save_grades(matricule, name, grades):
         return False
 
 def main(page: ft.Page):
+    # Set the theme to light mode (white theme)
+    page.theme_mode = ft.ThemeMode.LIGHT
+
     page.title = "Student Grades Entry"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER

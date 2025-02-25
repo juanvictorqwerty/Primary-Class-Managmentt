@@ -42,6 +42,9 @@ def fetch_grades(matricule):
         return None
 
 def main(page: ft.Page):
+    # Set the theme to light mode (white theme)
+    page.theme_mode = ft.ThemeMode.LIGHT
+
     page.title = "View Student Grades"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
